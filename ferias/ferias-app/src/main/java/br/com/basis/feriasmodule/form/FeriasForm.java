@@ -30,7 +30,7 @@ public class FeriasForm extends STypeComposite<SIComposite> {
 	public STypeInteger diasVendidos;
     public STypeBoolean isVenderDias;
     public STypeBoolean antecipar13;
-    
+    public STypeString observacao;
 
 
     @Override
@@ -71,6 +71,14 @@ public class FeriasForm extends STypeComposite<SIComposite> {
 				        .asAtrAnnotation().setAnnotated()
 						.asAtrBootstrap().colPreference(2);
         
+        observacao = addFieldString("observacao");
+        observacao
+            .asAtr().required().label("Observações")
+            .asAtrBootstrap().colPreference(12);
+        observacao
+            .withTextAreaView(sViewTextArea -> sViewTextArea.setLines(4))
+            .asAtr().maxLength(4000).asAtrAnnotation().setAnnotated();
+        
         this.addInstanceValidator(this::verificaNumeroDeDias);
         this.addInstanceValidator(this::verificaDatas);
         
@@ -82,6 +90,7 @@ public class FeriasForm extends STypeComposite<SIComposite> {
                 .add(isVenderDias)
                 .add(diasVendidos)
                 .add(antecipar13)
+                .add(observacao)
             );
     }
 
@@ -94,7 +103,7 @@ public class FeriasForm extends STypeComposite<SIComposite> {
  
         int diasFerias = myForm.findNearestOrException(dias).getInteger();
         int diasVender = myForm.findNearestOrException(diasVendidos).exists() ? 
-        				myForm.findNearestOrException(diasVendidos).getInteger() : 0;		
+        				 myForm.findNearestOrException(diasVendidos).getInteger() : 0;		
         
         if ((diasFerias + diasVender) > 30) {
             validator.error("A soma dos dias de férias com os dias vendidos não pode ser maior que 30");
