@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Implementation-Title: [singular :: common :: ui-static-resources]
+Implementation-Version: 1.8.0-RC2
+Archiver-Version: Plexus Archiver
+Built-By: vinicius
+Specification-Title: [singular :: common :: ui-static-resources]
+Implementation-Vendor-Id: org.opensingular
+Revision-Id: 
+Implementation-Build: 1.8.0-RC2.${buildNumber} | ${timestamp}
+Created-By: Apache Maven 3.5.0
+Build-Jdk: 1.8.0_161
+Specification-Version: 1.8.0-RC2
+Implementation-URL: http://opensingular.org/singular-resources/singula
+ r-ui-resources
+

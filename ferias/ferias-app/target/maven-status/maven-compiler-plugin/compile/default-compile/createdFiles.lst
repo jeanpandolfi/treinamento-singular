@@ -1,0 +1,11 @@
+br/com/basis/feriasmodule/config/FeriasStudioConfig.class
+br/com/basis/feriasmodule/config/FeriasModuleInitializer.class
+br/com/basis/feriasmodule/form/FeriasPackage.class
+br/com/basis/feriasmodule/form/FeriasForm$Profissoes.class
+br/com/basis/feriasmodule/FeriasModule.class
+br/com/basis/feriasmodule/spring/PersistenceConfiguration.class
+br/com/basis/feriasmodule/form/FeriasForm.class
+br/com/basis/feriasmodule/box/FeriasCaixaPendencia.class
+br/com/basis/feriasmodule/flow/FeriasFlow.class
+br/com/basis/feriasmodule/flow/FeriasFlow$FeriasTasks.class
+br/com/basis/feriasmodule/box/FeriasCaixaPendencia$CumprirDiligenciaAction.class

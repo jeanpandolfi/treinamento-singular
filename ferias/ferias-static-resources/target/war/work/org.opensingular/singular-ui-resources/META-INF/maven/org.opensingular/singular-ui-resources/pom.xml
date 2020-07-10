@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.opensingular</groupId>
+        <artifactId>singular-resources</artifactId>
+        <version>1.8.0-RC2</version>
+    </parent>
+
+    <artifactId>singular-ui-resources</artifactId>
+    <name>[singular :: common :: ui-static-resources]</name>
+    <packaging>war</packaging>
+
+    <build>
+    	<finalName>singular-static</finalName>
+    
+        <resources>
+            <resource>
+                <filtering>false</filtering>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>com.github.warmuuh</groupId>
+                <artifactId>libsass-maven-plugin</artifactId>
+                <version>0.2.7-libsass_3.4.3</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <inputPath>${basedir}/src/main/sass</inputPath>
+                    <outputPath>${basedir}/src/main/webapp/resources/singular</outputPath>
+                    <generateSourceMap>false</generateSourceMap>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.opensingular</groupId>
+            <artifactId>singular-commons-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
