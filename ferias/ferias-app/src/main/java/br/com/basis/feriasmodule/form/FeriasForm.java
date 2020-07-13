@@ -1,8 +1,10 @@
 package br.com.basis.feriasmodule.form;
 
-import java.time.LocalDate;
+import static org.opensingular.form.util.SingularPredicates.typeValueIsTrueAndNotNull;
+
 import java.util.Arrays;
 import java.util.function.Predicate;
+
 import javax.annotation.Nonnull;
 
 import org.opensingular.form.SIComposite;
@@ -18,8 +20,6 @@ import org.opensingular.form.type.util.SIYearMonth;
 import org.opensingular.form.type.util.STypeYearMonth;
 import org.opensingular.form.validation.InstanceValidatable;
 import org.opensingular.form.view.SViewByBlock;
-
-import static org.opensingular.form.util.SingularPredicates.typeValueIsTrueAndNotNull;
 
 @SInfoType(spackage = FeriasPackage.class, name = "Ferias")
 public class FeriasForm extends STypeComposite<SIComposite> {
@@ -50,7 +50,8 @@ public class FeriasForm extends STypeComposite<SIComposite> {
 	        .asAtrBootstrap().colPreference(2);		
         		
         dias = this.addFieldInteger("dias", true);
-        dias.asAtr().label("Quantidade de dias")
+        dias.addInstanceValidator(this::validarNrMaximoDiasFerias)
+        	.asAtr().label("Quantidade de dias")
 	        .asAtrAnnotation().setAnnotated()
 	        .asAtrBootstrap().colPreference(2);
         
@@ -73,7 +74,7 @@ public class FeriasForm extends STypeComposite<SIComposite> {
         
         observacao = addFieldString("observacao");
         observacao
-            .asAtr().required().label("Observações")
+            .asAtr().label("Observações")
             .asAtrBootstrap().colPreference(12);
         observacao
             .withTextAreaView(sViewTextArea -> sViewTextArea.setLines(4))
@@ -96,6 +97,12 @@ public class FeriasForm extends STypeComposite<SIComposite> {
 
     private Predicate<SInstance> isVenderDias() {
         return typeValueIsTrueAndNotNull(isVenderDias);
+    }
+    
+    private void validarNrMaximoDiasFerias(InstanceValidatable<SIInteger> validatable) {
+        if (validatable.getInstance().getInteger() > 30) {
+            validatable.error("Não é possivel solicitar mais que 30 dias de férias");
+        }
     }
     
     private void verificaNumeroDeDias(InstanceValidatable<SIComposite> validator) {
@@ -121,27 +128,6 @@ public class FeriasForm extends STypeComposite<SIComposite> {
         }
     }
     
-    public enum Profissoes {
-
-        DESENVOLVEDOR("Desenvolvedor"),
-        ANALISTA("Analista"),
-        GERENTE("Gerente"),
-        CEO("Diretor executivo");
-
-        private String descricao;
-
-        Profissoes(String descricao) {
-            this.descricao = descricao;
-        }
-
-        @Nonnull
-        public String getDescricao() {
-            return descricao;
-        }
-
-        public static String[] valuesOfDescricao(){
-            return Arrays.stream(values()).map(v -> v.descricao).toArray(String[]::new);
-        }
-    }
+    
 }
 
